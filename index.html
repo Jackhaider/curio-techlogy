@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>Curio.techlogy Onboarding</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<script>
+window.google = { script: { get run() {
+  var ok = function () {}, bad = function () {};
+  var runner = {
+    withSuccessHandler: function (f) { ok = f; return runner; },
+    withFailureHandler: function (f) { bad = f; return runner; },
+    publicApi: function (m, a) {
+      fetch("https://script.google.com/macros/s/AKfycbzj67RKiH-xFMHtM-3OntxclFFUFOgL7_NT7UDlYTU4wyoWGExHOMz2BsMyX8JFDdu6/exec", { method: 'POST', credentials: 'omit', redirect: 'follow', headers: { 'Content-Type': 'text/plain;charset=utf-8' }, body: JSON.stringify({ m: m, a: a }) })
+        .then(function (r) { return r.json(); })
+        .then(function (j) { if (j.error) bad(new Error(j.error)); else ok(j.result); })
+        .catch(function () { bad(new Error('Could not connect. Please check your internet and try again.')); });
+    }
+  };
+  return runner;
+} } };
+</script>
+<meta charset="utf-8">
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--paper:#f7f5f0;--card:#fffefb;--ink:#1b1a18;--ink2:#5d5952;--ink3:#7a756c;--line:#e6e2da;--line2:#d4cfc4;--accent:#b5471b;--accent-ink:#8f3612;--accent-soft:#f6e9e1;--good:#1f6b45;--good-soft:#e5f1ea;--warn:#8a5a00;--warn-soft:#f8efd9;--bad:#a12a2a;--bad-soft:#f8e6e4;--r:10px}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--paper);color:var(--ink);font:15px/1.55 Inter,-apple-system,"Segoe UI",Roboto,Arial,sans-serif}
+h1,h2,h3{font-weight:600;line-height:1.2;margin:0}
+.serif{font-family:"Instrument Serif",Georgia,serif;font-weight:400;letter-spacing:-.01em}
+a{color:var(--accent-ink)}
+p{margin:0 0 10px}
+.muted{color:var(--ink2)}.small{font-size:13px}.tiny{font-size:12px;color:var(--ink3)}
+.right{text-align:right}.nowrap{white-space:nowrap}
+.mono{font-variant-numeric:tabular-nums}
+.wordmark{font-size:19px;font-weight:600;letter-spacing:-.02em}.wordmark i{font-style:normal;color:var(--accent)}
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:18px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;min-height:42px;padding:9px 16px;border-radius:8px;border:1px solid var(--ink);background:var(--ink);color:#fff;font:600 14px/1.2 inherit;font-family:inherit;cursor:pointer;text-decoration:none}
+.btn:hover{background:#000}
+.btn.ghost{background:transparent;color:var(--ink);border-color:var(--line2)}.btn.ghost:hover{background:#f0ede6}
+.btn.accent{background:var(--accent);border-color:var(--accent)}.btn.accent:hover{background:var(--accent-ink)}
+.btn.danger{background:transparent;color:var(--bad);border-color:#dcb4af}.btn.danger:hover{background:var(--bad-soft)}
+.btn.sm{min-height:32px;padding:5px 10px;font-size:13px}
+.btn[disabled]{opacity:.55;cursor:wait}
+label.f{display:block;margin-bottom:14px;font-weight:500;font-size:14px}
+label.f .hint{display:block;font-weight:400;color:var(--ink3);font-size:12.5px;margin-top:2px}
+input[type=text],input[type=email],input[type=tel],input[type=date],input[type=number],input[type=search],select,textarea{width:100%;margin-top:5px;padding:10px 11px;border:1px solid var(--line2);border-radius:8px;background:#fff;font:inherit;font-weight:400;color:var(--ink);min-height:42px}
+input[type=file]{width:100%;margin-top:6px;font:inherit;font-size:13px;font-weight:400}
+textarea{min-height:84px;resize:vertical}
+:focus-visible{outline:2px solid var(--accent);outline-offset:1px}
+.check{display:flex;gap:10px;align-items:flex-start;font-weight:500;font-size:14px;margin:10px 0}.check input{margin-top:4px;width:17px;height:17px;flex:none}
+.badge{display:inline-block;padding:2px 8px;border-radius:99px;font-size:12px;font-weight:600;background:#eeebe4;color:var(--ink2);white-space:nowrap}
+.badge.good{background:var(--good-soft);color:var(--good)}.badge.warn{background:var(--warn-soft);color:var(--warn)}.badge.bad{background:var(--bad-soft);color:var(--bad)}.badge.accent{background:var(--accent-soft);color:var(--accent-ink)}
+.notice{padding:11px 13px;border-radius:8px;background:var(--warn-soft);color:#5f3f00;font-size:13.5px;margin-bottom:14px}
+.notice.bad{background:var(--bad-soft);color:#7c1f1f}.notice.good{background:var(--good-soft);color:#17523a}.notice.plain{background:#f0ede6;color:var(--ink2)}
+.progress{height:8px;border-radius:99px;background:#e9e5dc;overflow:hidden}.progress>span{display:block;height:100%;background:var(--accent);border-radius:99px}
+.spin{padding:50px 0;text-align:center;color:var(--ink3)}
+.toast{position:fixed;left:50%;bottom:22px;transform:translateX(-50%);max-width:92vw;background:var(--ink);color:#fff;padding:11px 16px;border-radius:9px;font-size:14px;z-index:60;box-shadow:0 8px 28px rgba(0,0,0,.2)}
+.toast.bad{background:var(--bad)}
+table.t{width:100%;border-collapse:collapse;font-size:14px}
+table.t th{font-size:12px;text-align:left;color:var(--ink3);font-weight:600;padding:8px 10px;border-bottom:1px solid var(--line2);white-space:nowrap}
+table.t td{padding:10px;border-bottom:1px solid var(--line);vertical-align:top}
+table.t tr:last-child td{border-bottom:0}
+table.t th.right,table.t td.right{text-align:right}
+.scroll{overflow-x:auto}
+.kv{display:grid;grid-template-columns:auto 1fr;gap:6px 18px;font-size:14px}.kv dt{color:var(--ink2)}.kv dd{margin:0;overflow-wrap:anywhere}
+.row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.between{justify-content:space-between}
+dialog{border:0;border-radius:12px;padding:0;width:min(560px,94vw);max-height:90vh;color:var(--ink);background:var(--card);box-shadow:0 18px 60px rgba(0,0,0,.28)}
+dialog::backdrop{background:rgba(27,26,24,.45)}
+.dlg{padding:20px}.dlg h3{font-size:18px;margin-bottom:12px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:0 14px}
+@media(max-width:560px){.grid2{grid-template-columns:1fr}}
+</style>
+
+<style>
+.wrap{max-width:980px;margin:0 auto;padding:22px 16px 60px}
+.top{display:flex;justify-content:space-between;align-items:center;margin-bottom:26px;gap:12px}
+.top img{height:34px;display:block}
+.steps{display:flex;gap:6px;margin-bottom:26px}
+.steps div{flex:1;font-size:12px;color:var(--ink3);border-top:3px solid var(--line2);padding-top:6px;min-width:0}
+.steps div.on{color:var(--ink);font-weight:600;border-color:var(--accent)}
+.steps div.done{border-color:var(--ink)}
+.hero{font-size:clamp(34px,6.4vw,54px);line-height:1.05;margin-bottom:10px}
+.lede{max-width:600px;color:var(--ink2);margin-bottom:26px;font-size:16px}
+.pkgs{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
+.pkg{display:flex;flex-direction:column;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:20px}
+.pkg h2{font-size:17px}
+.price{font-size:40px;margin:6px 0 2px;line-height:1.1}
+.pkg ul{list-style:none;padding:0;margin:14px 0;font-size:14px}
+.pkg li{padding:5px 0 5px 18px;position:relative}
+.pkg li:before{content:"";position:absolute;left:2px;top:13px;width:7px;height:7px;border-radius:50%;background:var(--accent)}
+.terms{display:grid;grid-template-columns:1fr auto;gap:5px 10px;font-size:13.5px;border-top:1px solid var(--line);padding-top:12px;margin:auto 0 14px}
+.terms span:nth-child(odd){color:var(--ink2)}.terms span:nth-child(even){text-align:right;font-weight:500}
+.narrow{max-width:620px;margin:0 auto}
+.title{font-size:32px;margin-bottom:6px}
+.bigamt{font-size:46px;line-height:1.1}
+.upi{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:11px 13px;background:#f3f0e9;border-radius:8px;margin:6px 0 14px;font-weight:600;overflow-wrap:anywhere}
+.qr{display:block;width:210px;max-width:100%;margin:0 auto 14px;border-radius:8px;border:1px solid var(--line)}
+.agree{max-height:380px;overflow-y:auto;border:1px solid var(--line2);border-radius:8px;padding:6px 14px 14px;background:#fff;margin-bottom:14px;font-size:14px}
+.agree h2{font-size:12px;letter-spacing:.06em;text-transform:uppercase;margin:16px 0 6px;color:var(--accent-ink)}
+.agree table{display:table;width:100%;border-collapse:collapse}.agree td{padding:4px 6px;border-bottom:1px solid var(--line);font-size:13.5px}.agree ul{margin:0 0 8px 18px;padding:0}.agree td.k{color:var(--ink2);width:40%}
+canvas.sig{display:block;width:100%;height:150px;border:1px dashed var(--ink3);border-radius:8px;background:#fff;touch-action:none;margin-top:5px}
+.hp{position:absolute;left:-9999px;height:0;overflow:hidden}
+@media(max-width:720px){.pkgs{grid-template-columns:1fr}.steps div span{display:none}.steps div.on span{display:inline}}
+</style>
+</head>
+<body>
+<div class="wrap" id="app"><div class="spin">Loading&hellip;</div></div>
+<script>
+var BOOT = { token: (function () { var t = new URLSearchParams(location.search).get('t') || ''; return /^[a-f0-9-]{36}$/i.test(t) ? t : ''; })() };
+var S = { cfg: null, pkg: null, view: null, form: {}, sid: 'sub-' + Math.random().toString(36).slice(2, 14) };
+var $ = function (id) { return document.getElementById(id); };
+function esc(s) { return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; }); }
+function money(n) { n = Math.round(n || 0); var s = String(Math.abs(n)); if (s.length > 3) s = s.slice(0, -3).replace(/\B(?=(\d{2})+(?!\d))/g, ',') + ',' + s.slice(-3); return (n < 0 ? '-' : '') + '₹' + s; }
+function fdate(s) { if (!s) return '-'; var p = String(s).slice(0, 10).split('-'); return p[2] + ' ' + ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'][+p[1] - 1] + ' ' + p[0]; }
+function api(m) {
+  var a = [].slice.call(arguments, 1);
+  return new Promise(function (res, rej) { google.script.run.withSuccessHandler(res).withFailureHandler(rej).publicApi(m, a); });
+}
+function errText(e) { return String((e && e.message) || e || 'Something went wrong.').replace(/^(Exception|Error):\s*/, ''); }
+function toast(msg, bad) {
+  document.querySelectorAll('.toast').forEach(function (x) { x.remove(); });
+  var t = document.createElement('div'); t.className = 'toast' + (bad ? ' bad' : ''); t.setAttribute('role', 'status'); t.textContent = msg;
+  document.body.appendChild(t); setTimeout(function () { t.remove(); }, bad ? 6000 : 2600);
+}
+function shell(step, inner) {
+  var names = ['Package', 'Details', 'Agreement', 'Payment', 'Welcome'];
+  var logo = S.cfg && S.cfg.logo ? '<img src="' + S.cfg.logo + '" alt="Curio.techlogy">' : '<div class="wordmark">Curio<i>.</i>techlogy</div>';
+  var steps = step ? '<div class="steps" aria-label="Step ' + step + ' of 5">' + names.map(function (n, i) {
+    return '<div class="' + (i + 1 === step ? 'on' : i + 1 < step ? 'done' : '') + '"><span>' + n + '</span></div>';
+  }).join('') + '</div>' : '';
+  $('app').innerHTML = '<div class="top">' + logo + '</div>' + steps + inner;
+  window.scrollTo(0, 0);
+}
+function busy(btn, on, text) {
+  if (!btn) return;
+  if (on) { btn.dataset.t = btn.textContent; btn.textContent = text || 'Please wait…'; btn.disabled = true; }
+  else { btn.textContent = btn.dataset.t; btn.disabled = false; }
+}
+function readFile(input, maxMb) {
+  return new Promise(function (res, rej) {
+    var f = input && input.files && input.files[0];
+    if (!f) return res(null);
+    if (f.size > maxMb * 1048576) return rej(new Error('Files must be under ' + maxMb + ' MB.'));
+    var r = new FileReader();
+    r.onload = function () { res({ name: f.name, type: f.type, b64: String(r.result).split(',')[1] }); };
+    r.onerror = function () { rej(new Error('Could not read that file.')); };
+    r.readAsDataURL(f);
+  });
+}
+
+// ---------- Steps 1-3: packages ----------
+function renderPackages() {
+  if (!S.cfg.accepting) {
+    shell(0, '<h1 class="serif hero">Onboarding opens soon.</h1><p class="lede">We are getting things ready. Please check back shortly.</p>');
+    return;
+  }
+  var cards = S.cfg.packages.map(function (p) {
+    return '<article class="pkg"><h2>' + esc(p.name) + '</h2><div class="serif price">' + money(p.price) + '</div>' +
+      '<div class="muted small">' + p.reels + ' reels &middot; ' + p.days + ' active delivery days</div>' +
+      '<ul>' + p.services.map(function (s) { return '<li>' + esc(s) + '</li>'; }).join('') + '</ul>' +
+      '<div class="terms"><span>Advance payment</span><span>' + money(p.advance) + '</span><span>Remaining payment</span><span>' + (p.balance ? money(p.balance) : 'None') + '</span></div>' +
+      '<button class="btn" data-pick="' + p.id + '">Choose ' + esc(p.name) + '</button></article>';
+  }).join('');
+  shell(1, '<h1 class="serif hero">Your daily reels, made with care.</h1><p class="lede">Educational reels, explainers, motion graphics and creative animation. You receive one finished reel per active delivery day. Choose your package to begin.</p><div class="pkgs">' + cards + '</div>');
+  document.querySelectorAll('[data-pick]').forEach(function (b) {
+    b.onclick = function () { S.pkg = S.cfg.packages.filter(function (p) { return p.id === b.dataset.pick; })[0]; renderDetails(); };
+  });
+}
+
+// ---------- Step 4: details ----------
+function field(name, label, type, opts) {
+  opts = opts || {};
+  var v = esc(S.form[name] || ''), req = opts.required ? ' required' : '', hint = opts.hint ? '<span class="hint">' + esc(opts.hint) + '</span>' : '';
+  var ctrl = type === 'textarea' ? '<textarea name="' + name + '"' + req + ' maxlength="' + (opts.max || 2000) + '">' + v + '</textarea>'
+    : '<input type="' + type + '" name="' + name + '" value="' + v + '"' + req + ' maxlength="' + (opts.max || 200) + '"' + (opts.auto ? ' autocomplete="' + opts.auto + '"' : '') + '>';
+  return '<label class="f">' + esc(label) + (opts.required ? '' : ' <span class="tiny">(optional)</span>') + hint + ctrl + '</label>';
+}
+function renderDetails(err) {
+  var p = S.pkg, own = p.clientProvides;
+  shell(2, '<div class="narrow"><h1 class="serif title">Tell us about you</h1><p class="muted">' + esc(p.name) + ' &middot; ' + money(p.price) + ' <button class="btn ghost sm" id="chg" type="button" style="margin-left:6px">Change</button></p>' +
+    (err ? '<div class="notice bad" role="alert">' + esc(err) + '</div>' : '') +
+    '<form id="df" class="card" novalidate>' +
+    '<div class="hp" aria-hidden="true"><label>Website<input name="website" tabindex="-1" autocomplete="off"></label></div>' +
+    '<div class="grid2">' + field('fullName', 'Full name', 'text', { required: true, auto: 'name', max: 120 }) +
+    field('whatsapp', 'WhatsApp number', 'tel', { required: true, auto: 'tel', max: 20 }) +
+    field('email', 'Email address', 'email', { required: true, auto: 'email', max: 160 }) +
+    field('brand', 'Brand or business name', 'text', { required: true, max: 160 }) +
+    field('instagram', 'Instagram handle', 'text', { max: 60 }) +
+    field('language', 'Preferred language', 'text', { required: true, max: 60 }) + '</div>' +
+    (own ? field('niche', 'Content niche', 'text', { required: true }) + field('audience', 'Target audience', 'text', { required: true, max: 300 }) +
+      field('contentLink', 'Link to your topics and scripts', 'text', { hint: 'A Google Drive or Docs link. You can also share them on WhatsApp later.', max: 500 })
+      : field('niche', 'Any niche in mind?', 'text', { hint: 'We select the niche with you, so leave this blank if you are unsure.' }) + field('audience', 'Who do you want to reach?', 'text', { max: 300 })) +
+    field('references', 'Video references', 'textarea', { hint: 'Links to reels or styles you like.', max: 1000 }) +
+    field('colours', 'Brand colours', 'text', { hint: 'For example: navy and white, or hex codes.' }) +
+    '<label class="f">Logo <span class="tiny">(optional, PNG, JPG, WEBP or PDF, under 5 MB)</span><input type="file" name="logo" accept="image/png,image/jpeg,image/webp,application/pdf"></label>' +
+    field('instructions', 'Special instructions', 'textarea') +
+    '<div class="row between"><button class="btn ghost" type="button" id="back">Back</button><button class="btn" type="submit" id="go">Continue to agreement</button></div></form></div>');
+  $('chg').onclick = $('back').onclick = function () { saveForm(); renderPackages(); };
+  $('df').onsubmit = function (e) { e.preventDefault(); submitDetails(); };
+}
+function saveForm() {
+  var f = $('df'); if (!f) return;
+  new FormData(f).forEach(function (v, k) { if (typeof v === 'string') S.form[k] = v; });
+}
+function submitDetails() {
+  saveForm();
+  var btn = $('go'); busy(btn, true, 'Saving…');
+  readFile($('df').elements.logo, 5).then(function (logo) {
+    var d = Object.assign({}, S.form, { packageId: S.pkg.id, submissionId: S.sid, logo: logo });
+    return api('apply', d);
+  }).then(function (view) { S.view = view; route(); }).catch(function (e) { renderDetails(errText(e)); });
+}
+
+// ---------- Steps 5-7: payment ----------
+function docButtons(v) {
+  return (v.documents || []).map(function (d) { return '<button class="btn ghost sm" type="button" data-doc="' + esc(d.docId) + '">' + esc(d.type) + ' PDF</button>'; }).join(' ');
+}
+function wireDocs() {
+  document.querySelectorAll('[data-doc]').forEach(function (b) {
+    b.onclick = function () {
+      busy(b, true, 'Preparing…');
+      api('download', S.view.token, b.dataset.doc).then(function (r) {
+        var bin = atob(r.b64), arr = new Uint8Array(bin.length);
+        for (var i = 0; i < bin.length; i++) arr[i] = bin.charCodeAt(i);
+        var url = URL.createObjectURL(new Blob([arr], { type: 'application/pdf' }));
+        var a = document.createElement('a'); a.href = url; a.download = r.name; a.target = '_blank'; document.body.appendChild(a); a.click(); a.remove();
+        setTimeout(function () { URL.revokeObjectURL(url); }, 30000);
+      }).catch(function (e) { toast(errText(e), true); }).then(function () { busy(b, false); });
+    };
+  });
+}
+function copyText(text) {
+  var done = function () { toast('UPI ID copied'); };
+  if (navigator.clipboard && navigator.clipboard.writeText) { navigator.clipboard.writeText(text).then(done).catch(fallback); } else fallback();
+  function fallback() {
+    var t = document.createElement('textarea'); t.value = text; document.body.appendChild(t); t.select();
+    try { document.execCommand('copy'); done(); } catch (e) { toast('Copy failed. Please select the UPI ID by hand.', true); }
+    t.remove();
+  }
+}
+function renderPay(err) {
+  shell(4, '<div class="spin">Preparing payment details&hellip;</div>');
+  api('payInfo', S.view.token).then(function (info) {
+    if (!info.due) return route();
+    var v = S.view, isBalance = info.due.kind === 'Balance';
+    shell(isBalance ? 0 : 4, '<div class="narrow"><h1 class="serif title">' + (isBalance ? 'Remaining payment' : 'Payment') + '</h1><p class="muted">' + esc(v.packageName) + ' &middot; ' + esc(v.projectId) + '</p>' +
+      (err ? '<div class="notice bad" role="alert">' + esc(err) + '</div>' : '') +
+      (v.note ? '<div class="notice bad">' + esc(v.note) + '</div>' : '') +
+      '<div class="card" style="margin-bottom:14px"><div class="small muted">' + esc(info.due.kind) + ' to pay now</div><div class="serif bigamt">' + money(info.due.amount) + '</div>' +
+      '<p class="small muted" style="margin:6px 0 14px">Package total ' + money(v.total) + (info.balanceNote ? '. ' + esc(info.balanceNote) : '') + '</p>' +
+      (info.qr ? '<img class="qr" src="' + info.qr + '" alt="UPI QR code"><p class="small muted" style="text-align:center">Scan with any UPI app and enter the exact amount above.</p>' : '') +
+      '<div class="small muted">UPI ID</div><div class="upi"><span>' + esc(info.upiId) + '</span><button class="btn ghost sm" type="button" id="cp">Copy</button></div>' +
+      '<dl class="kv" style="margin:0 0 14px"><dt>Account name</dt><dd>' + esc(info.upiName) + '</dd></dl>' +
+      '<a class="btn accent" style="width:100%" href="' + esc(info.upiLink) + '">Open UPI app with this amount</a>' +
+      '<p class="tiny" style="margin:8px 0 0">On a phone. If your app does not open or declines the link, scan the QR or pay to the UPI ID manually.</p></div>' +
+      '<form id="pf" class="card"><h2 style="font-size:16px;margin-bottom:6px">After you have paid</h2><p class="small muted">' + esc(info.instructions) + '</p>' +
+      '<label class="f">UTR / reference number<input type="text" name="utr" required maxlength="40" inputmode="text" autocomplete="off"></label>' +
+      '<label class="f">Payment screenshot <span class="tiny">(optional, under 5 MB)</span><input type="file" name="shot" accept="image/png,image/jpeg,image/webp,application/pdf"></label>' +
+      '<div class="notice plain">We check every payment by hand against our UPI records. ' + (isBalance ? 'Your final reel is delivered after this is verified.' : 'Your project starts after it is verified.') + '</div>' +
+      '<div class="row between"><span>' + docButtons(v) + '</span><button class="btn" id="ps" type="submit">Submit payment details</button></div></form></div>');
+    $('cp').onclick = function () { copyText(info.upiId); };
+    wireDocs();
+    $('pf').onsubmit = function (e) {
+      e.preventDefault();
+      var utr = this.elements.utr.value, b = $('ps'); busy(b, true, 'Submitting…');
+      readFile(this.elements.shot, 5).then(function (shot) { return api('submitPayment', S.view.token, { utr: utr, screenshot: shot }); })
+        .then(function (view) { S.view = view; toast('Payment details received'); route(); })
+        .catch(function (e2) { busy(b, false); toast(errText(e2), true); });
+    };
+  }).catch(function (e) { shell(0, '<div class="notice bad">' + esc(errText(e)) + '</div>'); });
+}
+
+// ---------- Steps 8-9: agreement ----------
+function renderAgreement() {
+  shell(3, '<div class="spin">Preparing your agreement&hellip;</div>');
+  api('agreement', S.view.token).then(function (a) {
+    shell(3, '<div class="narrow"><h1 class="serif title">Service agreement</h1><p class="muted">Please read this and sign below.</p>' +
+      '<div class="agree" tabindex="0">' + a.html + '</div>' +
+      '<form id="sf" class="card"><label class="f">Your full name<input type="text" name="name" required maxlength="120" value="' + esc(S.view.clientName || '') + '"></label>' +
+      '<div class="row between" style="font-weight:500;font-size:14px"><span>Your signature</span><button class="btn ghost sm" type="button" id="clr">Clear</button></div>' +
+      '<canvas class="sig" id="sig" aria-label="Draw your signature here"></canvas><p class="tiny" style="margin-top:4px">Sign with your finger or mouse.</p>' +
+      '<label class="check"><input type="checkbox" name="ok"> <span>I have read and accept this service agreement.</span></label>' +
+      '<button class="btn" style="width:100%" id="sb" type="submit">Accept and sign</button></form></div>');
+    var pad = signaturePad($('sig'));
+    $('clr').onclick = pad.clear;
+    $('sf').onsubmit = function (e) {
+      e.preventDefault();
+      if (!this.elements.ok.checked) return toast('Please tick the box to accept the agreement.', true);
+      if (pad.isEmpty()) return toast('Please draw your signature.', true);
+      var b = $('sb'), name = this.elements.name.value; busy(b, true, 'Signing…');
+      api('sign', S.view.token, { accepted: true, name: name, signature: pad.toDataURL() })
+        .then(function (view) { S.view = view; route(); })
+        .catch(function (e2) { busy(b, false); toast(errText(e2), true); });
+    };
+  }).catch(function (e) { shell(0, '<div class="notice bad">' + esc(errText(e)) + '</div>'); });
+}
+function signaturePad(c) {
+  var ctx, drawn = false, down = false;
+  function size() {
+    var r = c.getBoundingClientRect(), k = Math.min(window.devicePixelRatio || 1, 2);
+    c.width = r.width * k; c.height = r.height * k;
+    ctx = c.getContext('2d'); ctx.scale(k, k); ctx.lineWidth = 2.2; ctx.lineCap = 'round'; ctx.lineJoin = 'round'; ctx.strokeStyle = '#1b1a18';
+  }
+  size();
+  function at(e) { var r = c.getBoundingClientRect(); return { x: e.clientX - r.left, y: e.clientY - r.top }; }
+  c.addEventListener('pointerdown', function (e) { down = true; c.setPointerCapture(e.pointerId); var p = at(e); ctx.beginPath(); ctx.moveTo(p.x, p.y); e.preventDefault(); });
+  c.addEventListener('pointermove', function (e) { if (!down) return; var p = at(e); ctx.lineTo(p.x, p.y); ctx.stroke(); drawn = true; e.preventDefault(); });
+  c.addEventListener('pointerup', function () { down = false; });
+  c.addEventListener('pointercancel', function () { down = false; });
+  return { clear: function () { ctx.clearRect(0, 0, c.width, c.height); drawn = false; }, isEmpty: function () { return !drawn; }, toDataURL: function () { return c.toDataURL('image/png'); } };
+}
+
+// ---------- Step 10 and returning clients ----------
+function linkBlock(v) {
+  return v.clientLink ? '<div class="small muted" style="margin-top:14px">Save your private project link:</div><div class="upi small"><span>' + esc(v.clientLink) + '</span></div>' : '';
+}
+function waButton(v, text) {
+  return v.businessWhatsapp ? '<a class="btn accent" target="_blank" rel="noopener" href="https://wa.me/' + esc(v.businessWhatsapp) + '?text=' + encodeURIComponent(text) + '">Message us on WhatsApp</a>' : '';
+}
+function renderWelcome() {
+  var v = S.view;
+  shell(5, '<div class="narrow"><h1 class="serif hero">Welcome, ' + esc(v.clientName) + '.</h1>' +
+    '<p class="lede">Your onboarding for ' + esc(v.packageName) + ' is complete. Your project ID is <b>' + esc(v.projectId) + '</b>.</p>' +
+    '<div class="card"><h2 style="font-size:16px;margin-bottom:8px">What happens next</h2>' +
+    (v.projectStatus === 'Active' ? '<div class="notice good">Your payment is verified and your project is active.</div>' : '<div class="notice">We are checking your payment against our UPI records. Your project starts once it is verified, and we will confirm on WhatsApp.</div>') +
+    '<p class="small muted">You then receive one reel per active delivery day. If we need topics, scripts or approvals from you, we will ask on WhatsApp. Delivery pauses until they arrive, and your completion date moves by the same number of days at no extra cost.</p>' +
+    '<div class="row" style="margin-top:12px">' + waButton(v, 'Hi, I have completed onboarding for ' + v.projectId + '.') + docButtons(v) + '</div>' + linkBlock(v) + '</div></div>');
+  wireDocs();
+}
+function renderStatus() {
+  var v = S.view, pct = v.totalReels ? Math.round(v.delivered / v.totalReels * 100) : 0;
+  var banner = '';
+  if (v.projectStatus === 'Paused') banner = '<div class="notice">Delivery is paused for now. Your completion date moves by the paused days, at no extra cost.</div>';
+  if (v.projectStatus === 'Onboarding') banner = '<div class="notice">We are checking your payment. Your project starts once it is verified.</div>';
+  if (v.projectStatus === 'Completed') banner = '<div class="notice good">Your project is complete. Thank you for working with us.</div>';
+  if (v.projectStatus === 'Cancelled') banner = '<div class="notice plain">This project is closed.</div>';
+  if (v.awaitingCheck && v.projectStatus !== 'Onboarding') banner += '<div class="notice">We received your payment details and are checking them against our UPI records.</div>';
+  if (v.note) banner +='<div class="notice bad">' + esc(v.note) + '</div>';
+  shell(0, '<div class="narrow"><h1 class="serif title">Hi ' + esc(v.clientName) + '</h1><p class="muted">' + esc(v.packageName) + ' &middot; ' + esc(v.projectId) + '</p>' + banner +
+    '<div class="card" style="margin-bottom:14px"><div class="row between"><b>Delivered: ' + v.delivered + '/' + v.totalReels + '</b><span class="muted small">Remaining: ' + v.remaining + '/' + v.totalReels + '</span></div>' +
+    '<div class="progress" style="margin:10px 0 14px"><span style="width:' + pct + '%"></span></div>' +
+    '<dl class="kv"><dt>Start date</dt><dd>' + fdate(v.startDate) + '</dd><dt>Expected completion</dt><dd>' + fdate(v.expectedEnd) + '</dd><dt>Payment status</dt><dd>' + esc(v.paymentStatus) + '</dd><dt>Paid so far</dt><dd>' + money(v.amountPaid) + ' of ' + money(v.total) + '</dd></dl></div>' +
+    (v.due && v.due.kind === 'Balance' ? '<div class="card" style="margin-bottom:14px"><p><b>' + money(v.due.amount) + ' remaining.</b> This must be paid and verified before your final reel is delivered.</p><button class="btn accent" id="payb">Pay remaining amount</button></div>' : '') +
+    '<div class="card"><div class="row">' + waButton(v, 'Hi, this is about ' + v.projectId + '.') + docButtons(v) + '</div></div></div>');
+  wireDocs();
+  if ($('payb')) $('payb').onclick = function () { renderPay(); };
+}
+function route() {
+  var v = S.view;
+  if (v.nextStep === 'pay') return renderPay();
+  if (v.nextStep === 'sign') return renderAgreement();
+  return BOOT.token ? renderStatus() : renderWelcome();
+}
+function start() {
+  api('config').then(function (cfg) {
+    S.cfg = cfg;
+    if (BOOT.token) return api('status', BOOT.token).then(function (v) { S.view = v; route(); });
+    renderPackages();
+  }).catch(function (e) { shell(0, '<div class="notice bad" role="alert">' + esc(errText(e)) + '</div>'); });
+}
+start();
+</script>
+</body>
+</html>
